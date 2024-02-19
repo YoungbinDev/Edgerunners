@@ -1,10 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+public enum GameFeatureActionType
+{
+    None = 0,
+    SpawnPrefab = 1,
+    AddComponent = 2,
+}
 
 
-public class GameFeatureAction : ScriptableObject
+[System.Serializable]
+public class GameFeatureAction
 {
     public virtual void Activate() { }
     public virtual void Deactivate() { }

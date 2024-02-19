@@ -1,28 +1,59 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 [CreateAssetMenu]
 public class GameFeature : ScriptableObject
 {
-    public List<GameFeatureAction> GameFeatureActions = new List<GameFeatureAction>();
+    [HideInInspector]
+    public GameFeatureActionType currentActionType;
+
+    [SerializeField]
+    public List<ActionData> actionDataList = new List<ActionData>();
+
+    [Serializable]
+    public struct ActionData
+    {
+        [SerializeField, ReadOnly]
+        private GameFeatureActionType actionType;
+        [SerializeReference]
+        public GameFeatureAction gameFeatureAction;
+
+        public ActionData(GameFeatureActionType actionType, GameFeatureAction gameFeatureAction)
+        {
+            this.actionType = actionType;
+            this.gameFeatureAction = gameFeatureAction;
+        }
+    }
 
     public void Activate()
     {
-        foreach (GameFeatureAction action in GameFeatureActions)
+        foreach (ActionData actionData in actionDataList)
         {
-            action.Activate();
+            actionData.gameFeatureAction.Activate();
         }
     }
 
     public void Deactivate()
     {
-        foreach (GameFeatureAction action in GameFeatureActions)
+        foreach (ActionData actionData in actionDataList)
         {
-            action.Deactivate();
+            actionData.gameFeatureAction.Deactivate();
+        }
+    }
+
+    public void AddAction(GameFeatureActionType actionType)
+    {
+        switch (actionType)
+        {
+            case GameFeatureActionType.SpawnPrefab:                
+                actionDataList.Add(new ActionData(currentActionType, new GameFeatureAction_SpawnPrefab()));
+                break;
+            case GameFeatureActionType.AddComponent:
+                actionDataList.Add(new ActionData(currentActionType, new GameFeatureAction_AddComponent()));
+                break;
         }
     }
 }

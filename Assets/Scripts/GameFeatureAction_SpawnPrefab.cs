@@ -1,16 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+
 public class GameFeatureAction_SpawnPrefab : GameFeatureAction
 {
-    public GameObject Prefab;
+    public GameObject prefab;
 
     public override void Activate()
     {
-        
+        GameObject.Instantiate(prefab);
     }
 
     public override void Deactivate() 
