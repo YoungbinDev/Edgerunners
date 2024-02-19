@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class FPSController : MonoBehaviour
 {
     [SerializeField]
     private float playerSpeed = 2.0f;
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         inputManager = InputManager.Instance;
-        inputManager.BindFunction("Jump", UnityEngine.InputSystem.InputActionPhase.Started, ctx => OnJump());
+        inputManager.BindFunction("Player", "Jump", InputActionPhase.Performed, ctx => OnJump());
     }
 
     void Update()
@@ -32,10 +33,10 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Debug.Log(groundedPlayer);
-
-        Vector2 moveInput = inputManager.GetInputActionValue<Vector2>("Movement");
+        Vector2 moveInput = inputManager.GetInputActionValue<Vector2>("Player", "Movement");
+        Debug.Log(moveInput);
         Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+
         controller.Move(moveDirection * Time.deltaTime * playerSpeed);
 
         playerVelocity.y += gravityValue * Time.deltaTime;

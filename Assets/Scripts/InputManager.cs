@@ -1,9 +1,8 @@
 using System;
 using Unity.VisualScripting;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
+
 
 public class InputManager : MonoBehaviour
 {
@@ -17,11 +16,12 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private PlayerControls playerControls;
+    [SerializeField]
+    private InputActionAsset inputActions;
 
     private void Awake()
     {
-        if(_instance != null && _instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -29,23 +29,29 @@ public class InputManager : MonoBehaviour
         {
             _instance = this;
         }
-
-        playerControls = new PlayerControls();
     }
 
     private void OnEnable()
     {
-        playerControls.Enable();
+        inputActions.Enable();
     }
 
     private void OnDisable()
     {
-        playerControls.Disable();
+        inputActions.Disable();
     }
 
-    public void BindFunction(string actionName, InputActionPhase actionPhase, Action<InputAction.CallbackContext> callbackContext)
+    public void BindFunction(string actionMapName, string actionName, InputActionPhase actionPhase, Action<InputAction.CallbackContext> callbackContext)
     {
-        var action = playerControls.FindAction(actionName);
+        var actionMap = inputActions.FindActionMap(actionMapName);
+
+        if (actionMap == null)
+        {
+            Debug.LogWarning($"ActionMap '{actionMap}' not found.");
+            return;
+        }
+
+        var action = actionMap.FindAction(actionName);
 
         if (action == null)
         {
@@ -67,10 +73,18 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public unsafe T GetInputActionValue<T>(string actionName)
+    public unsafe T GetInputActionValue<T>(string actionMapName, string actionName)
     {
-        var action = playerControls.FindAction(actionName);
-    
+        var actionMap = inputActions.FindActionMap(actionMapName);
+
+        if (actionMap == null)
+        {
+            Debug.LogWarning($"ActionMap '{actionMap}' not found.");
+            return default(T);
+        }
+
+        var action = actionMap.FindAction(actionName);
+
         if (action == null)
         {
             Debug.LogWarning($"Action '{actionName}' not found.");
@@ -78,11 +92,11 @@ public class InputManager : MonoBehaviour
         }
 
         object actionObj = action.ReadValueAsObject();
+
         if (actionObj == null)
         {
             return default(T);
         }
-       
         return actionObj.ConvertTo<T>();
     }
 }
