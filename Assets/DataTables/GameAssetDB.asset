@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc08396b5b72c342b7df3b1bfbb8de9, type: 3}
+  m_Name: GameAssetDB
+  m_EditorClassIdentifier: 
+  Entities:
+  - Id: 1
+    Type: 1
+    AssetPath3D: Assets/Prefabs/Character/
+    AssetName3D: Test1
+    AssetPath2D: Assets/Images/
+    AssetName2D: Test1_Image
+  - Id: 2
+    Type: 2
+    AssetPath3D: Assets/Prefabs/Item
+    AssetName3D: Test2
+    AssetPath2D: Assets/Images/
+    AssetName2D: Test2_Image
+  - Id: 3
+    Type: 2
+    AssetPath3D: Assets/Prefabs/Item
+    AssetName3D: Test3
+    AssetPath2D: Assets/Images/
+    AssetName2D: Test3_Image

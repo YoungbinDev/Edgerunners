@@ -12,16 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef94c3afa6a7264693a13efa6a3f626, type: 3}
   m_Name: GameFeature_Test
   m_EditorClassIdentifier: 
-  currentActionType: 0
-  actionDataList:
-  - actionType: 0
-    gameFeatureAction:
-      rid: 226218366408851472
+  DBList:
+  - {fileID: 11400000, guid: eb4c3c1ed9b15fe4cbc51ff1e3081dc1, type: 2}
+  - {fileID: 11400000, guid: b941a390cd5333b45afba01197244308, type: 2}
+  ActionDataList: []
   references:
     version: 2
-    RefIds:
-    - rid: 226218366408851472
-      type: {class: GameFeatureAction_SpawnPrefab, ns: , asm: Assembly-CSharp}
-      data:
-        prefab: {fileID: 7584443414920034266, guid: 681303678ab5cd14e90ab6b5e2110832,
-          type: 3}
+    RefIds: []
