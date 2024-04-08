@@ -8,12 +8,10 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
-    // GameFeatureManager 변수
     public GameFeatureManager GameFeatureManager;
     public DataTableManager DataTableManager;
     public GameAssetManager GameAssetManager;
 
-    // GameManager 싱글톤 인스턴스
     public static GameManager Instance
     {
         get
@@ -43,6 +41,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //TODO: null 체크
         GameFeatureManager.Init();
         DataTableManager.Init();
         GameAssetManager.Init();

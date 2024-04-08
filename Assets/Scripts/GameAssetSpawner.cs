@@ -20,6 +20,7 @@ public class GameAssetSpawner : MonoBehaviour
             return;
         }
 
+        //TODO: 테스트용 이므로 지워야함
         SpawnGameAsset();
     }
 
