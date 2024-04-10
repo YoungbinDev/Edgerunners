@@ -529,6 +529,11 @@ PrefabInstance:
       propertyPath: GameAssetId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3624221535486906859, guid: f858573a42c14694d95d76d2c43e167f,
+        type: 3}
+      propertyPath: SpawnOnStartedGame
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3978848816788019840, guid: f858573a42c14694d95d76d2c43e167f,
         type: 3}
       propertyPath: m_LocalScale.x

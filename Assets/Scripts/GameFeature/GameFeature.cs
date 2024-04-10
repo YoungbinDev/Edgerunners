@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 [CreateAssetMenu]
@@ -11,9 +12,9 @@ public class GameFeature : ScriptableObject
     private List<ScriptableObject> DBList;
     private Dictionary<string, ScriptableObject> DBMap;
 
-    [SerializeField]
     public List<ActionData> ActionDataList = new List<ActionData>();
 
+    public InputActionAsset InputActions;
 
     public Dictionary<string, ScriptableObject> GetDataDictionary()
     {

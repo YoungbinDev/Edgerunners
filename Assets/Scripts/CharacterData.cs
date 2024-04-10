@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -35,7 +36,19 @@ public class CharacterData : MonoBehaviour
         CharacterDB = GameManager.Instance.DataTableManager.DataTableMap["CharacterDB"] as CharacterDB;
         Entity = CharacterDB.GetDataDictionary()[GameAssetId];
 
+        InitializeComponents();
         LoadStat();
+    }
+
+    private void InitializeComponents()
+    {
+        switch(Entity.Type)
+        {
+            case ECharacterType.PC:
+                break;
+            case ECharacterType.NPC:
+                break;
+        }
     }
 
     private void LoadStat()

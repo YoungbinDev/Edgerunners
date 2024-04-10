@@ -11,6 +11,8 @@ public class GameAssetSpawner : MonoBehaviour
 
     [SerializeField]
     private int GameAssetId = -1;
+    [SerializeField]
+    private bool SpawnOnStartedGame;
 
     private void Start()
     {
@@ -20,8 +22,10 @@ public class GameAssetSpawner : MonoBehaviour
             return;
         }
 
-        //TODO: 테스트용 이므로 지워야함
-        SpawnGameAsset();
+        if(SpawnOnStartedGame)
+        {
+            SpawnGameAsset();
+        }
     }
 
     public async void SpawnGameAsset(int spawnGameAssetId = -1)

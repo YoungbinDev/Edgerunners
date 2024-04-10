@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public GameFeatureManager GameFeatureManager;
     public DataTableManager DataTableManager;
     public GameAssetManager GameAssetManager;
+    public InputManager InputManager;
+
+    public PlayerController PlayerController;
 
     public static GameManager Instance
     {
@@ -41,9 +44,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //TODO: null üũ
+        //TODO: null 체크
         GameFeatureManager.Init();
         DataTableManager.Init();
         GameAssetManager.Init();
+        InputManager.Init();
     }
 }

@@ -2,48 +2,33 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerController;
 
 
 public class InputManager : MonoBehaviour
 {
-    private static InputManager _instance;
 
-    public static InputManager Instance
+    private InputActionAsset InputActions;
+
+    public void Init()
     {
-        get
-        {
-            return _instance;
-        }
+        InputActions = GameManager.Instance.GameFeatureManager.GameFeature.InputActions;
+        ActivateInput();
     }
 
-    [SerializeField]
-    private InputActionAsset inputActions;
-
-    private void Awake()
+    public void ActivateInput()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
+        InputActions.Enable();
     }
 
-    private void OnEnable()
+    public void DeactivateInput()
     {
-        inputActions.Enable();
+        InputActions.Disable();
     }
 
-    private void OnDisable()
+    public void BindFunction(string actionMapName, string actionName, OnChangedInputActionValueEvent Callback)
     {
-        inputActions.Disable();
-    }
-
-    public void BindFunction(string actionMapName, string actionName, InputActionPhase actionPhase, Action<InputAction.CallbackContext> callbackContext)
-    {
-        var actionMap = inputActions.FindActionMap(actionMapName);
+        var actionMap = InputActions.FindActionMap(actionMapName);
 
         if (actionMap == null)
         {
@@ -59,23 +44,13 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        switch (actionPhase)
-        {
-            case InputActionPhase.Started:
-                action.started += callbackContext;
-                break;
-            case InputActionPhase.Performed:
-                action.performed += callbackContext;
-                break;
-            case InputActionPhase.Canceled:
-                action.canceled += callbackContext;
-                break;
-        }
+        action.performed += context => Callback(actionName, context.ReadValueAsObject());
+        action.canceled += context => Callback(actionName, context.ReadValueAsObject());
     }
 
     public unsafe T GetInputActionValue<T>(string actionMapName, string actionName)
     {
-        var actionMap = inputActions.FindActionMap(actionMapName);
+        var actionMap = InputActions.FindActionMap(actionMapName);
 
         if (actionMap == null)
         {
@@ -97,6 +72,7 @@ public class InputManager : MonoBehaviour
         {
             return default(T);
         }
+
         return actionObj.ConvertTo<T>();
     }
 }
