@@ -7,7 +7,6 @@ using static PlayerController;
 
 public class InputManager : MonoBehaviour
 {
-
     private InputActionAsset InputActions;
 
     public void Init()
