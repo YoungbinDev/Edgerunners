@@ -23,7 +23,7 @@ public class GameAssetData : MonoBehaviour
         {
             case EGameAssetType.Character:
                 {
-                    CharacterData characterData = this.AddComponent<CharacterData>();
+                    CharacterData characterData = this.transform.AddComponent<CharacterData>();
                     characterData.Init(Entity);
                     break;
                 }
