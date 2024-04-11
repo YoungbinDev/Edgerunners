@@ -21,3 +21,12 @@ public enum ECharacterGender
     Female = 2,
     Max = 3,
 }
+
+public enum EItemType
+{
+    None = 0,
+    Weapon = 1,
+    Armor = 2,
+    Consumable = 3,
+    Max = 4,
+}

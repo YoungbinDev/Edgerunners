@@ -17,8 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e0cddb5ae12b7f147a12dc54512997f6
   m_SerializeEntries:
-  - m_GUID: d6da7e3af1f832d4e9d4bedb58cc5aa4
-    m_Address: Test1
+  - m_GUID: 1b0b1835c155d7a41b3c6bbf3cdb288d
+    m_Address: Gun01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5010cdf0a15ee7140a4e2ef479f1e75a
+    m_Address: Character01
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

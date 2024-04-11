@@ -4,29 +4,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[Serializable]
-struct FCharacterStat
-{
-    public int Str;
-    public int Dex;
-    public int Luck;
-    public int Int;
-}
 
 public class CharacterData : MonoBehaviour
 {
     private CharacterDB CharacterDB;
-    private CharacterDBEntity Entity;
 
-    [SerializeField]
-    FCharacterStat Stat;
+    public float HP;
+    public float SP;
+    public int Str;
+    public int Dex;
+    public int Luck;
+    public int Int;
 
     public void Init(GameAssetDBEntity Entity)
-    {
-        LoadData(Entity.Id);
-    }
-
-    private void LoadData(int GameAssetId)
     {
         if (GameManager.Instance.GameFeatureManager == null)
         {
@@ -34,24 +24,19 @@ public class CharacterData : MonoBehaviour
         }
 
         CharacterDB = GameManager.Instance.DataTableManager.DataTableMap["CharacterDB"] as CharacterDB;
-        Entity = CharacterDB.GetDataDictionary()[GameAssetId];
 
-        InitializeComponents();
-        LoadStat();
+        LoadData(Entity.Id);
     }
 
-    private void InitializeComponents()
+    private void LoadData(int GameAssetId)
     {
-        switch(Entity.Type)
-        {
-            case ECharacterType.PC:
-                break;
-            case ECharacterType.NPC:
-                break;
-        }
+        CharacterDBEntity Entity = CharacterDB.GetDataDictionary()[GameAssetId];
+
+        SetData(Entity);
+        InitializeComponents(Entity);
     }
 
-    private void LoadStat()
+    private void SetData(CharacterDBEntity Entity)
     {
         string statsString = Entity.DefaultStat;
         string[] stats = statsString.Split(';');
@@ -71,17 +56,23 @@ public class CharacterData : MonoBehaviour
                 {
                     switch (statName)
                     {
+                        case "HP":
+                            HP = statValue;
+                            break;
+                        case "SP":
+                            SP = statValue;
+                            break;
                         case "Str":
-                            Stat.Str = statValue;
+                            Str = statValue;
                             break;
                         case "Dex":
-                            Stat.Dex = statValue;
+                            Dex = statValue;
                             break;
                         case "Luck":
-                            Stat.Luck = statValue;
+                            Luck = statValue;
                             break;
                         case "Int":
-                            Stat.Int = statValue;
+                            Int = statValue;
                             break;
                         default:
                             Debug.LogWarning("Unknown stat: " + statName);
@@ -97,6 +88,17 @@ public class CharacterData : MonoBehaviour
             {
                 Debug.LogWarning("Invalid stat format: " + stat);
             }
+        }
+    }
+
+    private void InitializeComponents(CharacterDBEntity Entity)
+    {
+        switch (Entity.Type)
+        {
+            case ECharacterType.PC:
+                break;
+            case ECharacterType.NPC:
+                break;
         }
     }
 }

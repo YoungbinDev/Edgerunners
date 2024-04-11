@@ -527,7 +527,7 @@ PrefabInstance:
     - target: {fileID: 3624221535486906859, guid: f858573a42c14694d95d76d2c43e167f,
         type: 3}
       propertyPath: GameAssetId
-      value: 1
+      value: 10000001
       objectReference: {fileID: 0}
     - target: {fileID: 3624221535486906859, guid: f858573a42c14694d95d76d2c43e167f,
         type: 3}

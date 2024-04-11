@@ -13,6 +13,8 @@ public class GameAssetSpawner : MonoBehaviour
     private int GameAssetId = -1;
     [SerializeField]
     private bool SpawnOnStartedGame;
+    [SerializeField]
+    private bool IsSocketSpawner;
 
     private void Start()
     {
@@ -43,6 +45,7 @@ public class GameAssetSpawner : MonoBehaviour
         GameObject createdAsset = await GameAssetManager.CreateAsset(spawnGameAssetId);
         GameObject spawnedAsset = Instantiate(createdAsset, this.transform.position, this.transform.rotation);
         GameAssetData assetData = spawnedAsset.AddComponent<GameAssetData>();
+        spawnedAsset.transform.parent = IsSocketSpawner ? this.transform : null;
         assetData.Init(SpawnedGameAssetKey, (GameManager.Instance.DataTableManager.DataTableMap["GameAssetDB"] as GameAssetDB).GetDataDictionary()[spawnGameAssetId]);
         SpawnedGameAssets.Add(SpawnedGameAssetKey, spawnedAsset);
         ++SpawnedGameAssetKey;

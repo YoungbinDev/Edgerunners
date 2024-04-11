@@ -2,24 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class GameAssetData : MonoBehaviour
 {
     [SerializeField]
     private int AssetKey;
-    private GameAssetDBEntity Entity;
+
+    public int Id;
+    public EGameAssetType Type;
 
     public void Init(int AssetKey, GameAssetDBEntity Entity)
     {
         this.AssetKey = AssetKey;
-        this.Entity = Entity;
 
-        LoadData();
+        SetData(Entity);
+        InitializeComponents(Entity);
     }
 
-    public void LoadData()
+    private void SetData(GameAssetDBEntity Entity)
     {
-        switch(Entity.Type)
+        Id = Entity.Id;
+        Type = Entity.Type;
+    }
+
+    private void InitializeComponents(GameAssetDBEntity Entity)
+    {
+        switch (Entity.Type)
         {
             case EGameAssetType.Character:
                 {
@@ -27,9 +36,11 @@ public class GameAssetData : MonoBehaviour
                     characterData.Init(Entity);
                     break;
                 }
-                
+
             case EGameAssetType.Item:
                 {
+                    ItemData itemData = this.transform.AddComponent<ItemData>();
+                    itemData.Init(Entity);
                     break;
                 }
         }

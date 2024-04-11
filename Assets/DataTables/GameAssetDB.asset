@@ -13,21 +13,27 @@ MonoBehaviour:
   m_Name: GameAssetDB
   m_EditorClassIdentifier: 
   Entities:
-  - Id: 1
+  - Id: 10000001
     Type: 1
     AssetPath3D: Assets/Prefabs/Character/
-    AssetName3D: Test1
+    AssetName3D: Character01
     AssetPath2D: Assets/Images/
-    AssetName2D: Test1_Image
-  - Id: 2
+    AssetName2D: Character01_Image
+  - Id: 10000002
     Type: 2
     AssetPath3D: Assets/Prefabs/Item
-    AssetName3D: Test2
+    AssetName3D: Gun01
     AssetPath2D: Assets/Images/
-    AssetName2D: Test2_Image
-  - Id: 3
+    AssetName2D: Gun01_Image
+  - Id: 10000003
     Type: 2
     AssetPath3D: Assets/Prefabs/Item
-    AssetName3D: Test3
+    AssetName3D: UpperArmor01
     AssetPath2D: Assets/Images/
-    AssetName2D: Test3_Image
+    AssetName2D: UpperArmor01_Image
+  - Id: 10000004
+    Type: 2
+    AssetPath3D: Assets/Prefabs/Item
+    AssetName3D: HeathPotion01
+    AssetPath2D: Assets/Images/
+    AssetName2D: HeathPotion01_Image
