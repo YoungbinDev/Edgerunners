@@ -15,6 +15,6 @@ MonoBehaviour:
   Entities:
   - GameAssetId: 10000001
     Type: 1
-    DefaultName: YB
-    DefaultGender: 1
-    DefaultStat: HP:+100;SP:+100;Str:+10;Dex:+20;Luck:+30;Int:-40;
+    Name: YB
+    Gender: 1
+    Stat: HP:+100;SP:+100;Str:+10;Dex:+20;Luck:+30;Int:-40;

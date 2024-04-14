@@ -15,16 +15,16 @@ MonoBehaviour:
   Entities:
   - GameAssetId: 10000002
     Type: 1
-    DefaultName: DefaultGun
-    DefaultPrice: 1000
-    DefaultExplain: "\uAE30\uBCF8 \uCD1D\uC774\uB2E4."
+    Name: DefaultGun
+    Price: 1000
+    Explain: "\uAE30\uBCF8 \uCD1D\uC774\uB2E4."
   - GameAssetId: 10000003
     Type: 2
-    DefaultName: DefaultUpperArmor
-    DefaultPrice: 1000
-    DefaultExplain: "\uAE30\uBCF8 \uC0C1\uC758 \uBC29\uC5B4\uAD6C\uB2E4."
+    Name: DefaultUpperArmor
+    Price: 1000
+    Explain: "\uAE30\uBCF8 \uC0C1\uC758 \uBC29\uC5B4\uAD6C\uB2E4."
   - GameAssetId: 10000004
     Type: 3
-    DefaultName: HealthPotion
-    DefaultPrice: 100
-    DefaultExplain: "\uCCB4\uB825 \uBB3C\uC57D\uC774\uB2E4."
+    Name: HealthPotion
+    Price: 100
+    Explain: "\uCCB4\uB825 \uBB3C\uC57D\uC774\uB2E4."

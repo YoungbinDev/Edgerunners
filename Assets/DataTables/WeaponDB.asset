@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entities:
   - GameAssetId: 10000002
-    DefaultDamagePerAttack: 10
-    DefaultTimePerAttack: 0.1
-    DefaultAttackRange: 100
-    StatValueForAdditionalWeaponEffect: Str/Damage:+10;Dex/AttackRate:+10;
+    DamagePerAttack: 10
+    TimePerAttack: 0.1
+    AttackRange: 100
+    StatValueForAdditionalWeaponEffect: Str/DamagePerAttack:+10;Dex/TimePerAttack:-1;

@@ -14,9 +14,9 @@ public class CharacterDBEntity
 {
     public int GameAssetId;
     public ECharacterType Type;
-    public string DefaultName;
-    public ECharacterGender DefaultGender;
-    public string DefaultStat;
+    public string Name;
+    public ECharacterGender Gender;
+    public string Stat;
 }
 
 [System.Serializable]
@@ -24,18 +24,18 @@ public class ItemDBEntity
 {
     public int GameAssetId;
     public EItemType Type;
-    public string DefaultName;
-    public int DefaultPrice;
-    public string DefaultExplain;
+    public string Name;
+    public int Price;
+    public string Explain;
 }
 
 [System.Serializable]
 public class WeaponDBEntity
 {
     public int GameAssetId;
-    public float DefaultDamagePerAttack;
-    public float DefaultTimePerAttack;
-    public float DefaultAttackRange;
+    public float DamagePerAttack;
+    public float TimePerAttack;
+    public float AttackRange;
     public string StatValueForAdditionalWeaponEffect;
 }
 
@@ -43,7 +43,7 @@ public class WeaponDBEntity
 public class ArmorDBEntity
 {
     public int GameAssetId;
-    public float DefaultDefenseDamagePerAttack;
+    public float DefenseDamagePerAttack;
     public string AdditionalStat;
 }
 

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entities:
   - GameAssetId: 10000003
-    DefaultDefenseDamagePerAttack: 10
+    DefenseDamagePerAttack: 10
     AdditionalStat: Dex:+10;

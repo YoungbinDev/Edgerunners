@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class ItemData : MonoBehaviour
 {
@@ -36,9 +35,9 @@ public class ItemData : MonoBehaviour
     private void SetData(ItemDBEntity Entity)
     {
         Type = Entity.Type;
-        Name = Entity.DefaultName;
-        Price = Entity.DefaultPrice;
-        Explain = Entity.DefaultExplain;
+        Name = Entity.Name;
+        Price = Entity.Price;
+        Explain = Entity.Explain;
     }
 
     private void InitializeComponents(ItemDBEntity Entity)

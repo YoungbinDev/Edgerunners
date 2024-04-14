@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ public class CharacterData : MonoBehaviour
 
     private void SetData(CharacterDBEntity Entity)
     {
-        string statsString = Entity.DefaultStat;
+        string statsString = Entity.Stat;
         string[] stats = statsString.Split(';');
         foreach (string stat in stats)
         {
@@ -54,30 +55,8 @@ public class CharacterData : MonoBehaviour
                 int statValue;
                 if (int.TryParse(parts[1], out statValue))
                 {
-                    switch (statName)
-                    {
-                        case "HP":
-                            HP = statValue;
-                            break;
-                        case "SP":
-                            SP = statValue;
-                            break;
-                        case "Str":
-                            Str = statValue;
-                            break;
-                        case "Dex":
-                            Dex = statValue;
-                            break;
-                        case "Luck":
-                            Luck = statValue;
-                            break;
-                        case "Int":
-                            Int = statValue;
-                            break;
-                        default:
-                            Debug.LogWarning("Unknown stat: " + statName);
-                            break;
-                    }
+                    FieldInfo fieldInfo = GetType().GetField(statName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    fieldInfo.SetValue(this, statValue);
                 }
                 else
                 {
