@@ -18,12 +18,18 @@ public class CharacterData : MonoBehaviour
     public OnUnPossessed OnUnPossessedEvent;
     public OnChangedStatValue OnChangedStatValueEvent;
 
-    public float HP;
-    public float SP;
-    public int Str;
-    public int Dex;
-    public int Luck;
-    public int Int;
+    [SerializeField]
+    private float HP;
+    [SerializeField]
+    private float SP;
+    [SerializeField]
+    private int Str;
+    [SerializeField]
+    private int Dex;
+    [SerializeField]
+    private int Luck;
+    [SerializeField]
+    private int Int;
 
     public void Init(GameAssetDBEntity Entity)
     {
