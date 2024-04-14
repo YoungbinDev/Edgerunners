@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     private InputManager InputManager;
 
     public delegate void OnChangedInputActionValueEvent(string actionName, object value);
-    public delegate void OnPossessBy(GameObject character);
+    public delegate void OnPossess(GameObject character);
+    public delegate void OnUnPossess(GameObject character);
 
     private Dictionary<string, OnChangedInputActionValueEvent> OnChangedPlayerInputActionValueEventMap = new Dictionary<string, OnChangedInputActionValueEvent>();
-    public OnPossessBy OnPossessByEvent;
+    public OnPossess OnPossessEvent;
+    public OnUnPossess OnUnPossessEvent;
 
     [SerializeField]
     private GameObject PossessCharacter;
@@ -27,13 +29,22 @@ public class PlayerController : MonoBehaviour
 
     public void SetPossessCharacter(GameObject character)
     {
-        if(character.GetComponent<CharacterData>() == null)
+        CharacterData characterData = character.GetComponent<CharacterData>();
+        if (characterData == null)
         {
+            if(PossessCharacter != null)
+            {
+                OnUnPossessEvent.Invoke(PossessCharacter);
+                PossessCharacter.GetComponent<CharacterData>().OnUnPossessedEvent.Invoke();
+                PossessCharacter = null;
+            }
+
             return;
         }
 
         PossessCharacter = character;
-        OnPossessByEvent.Invoke(character);
+        OnPossessEvent.Invoke(character);
+        characterData.OnPossessedEvent.Invoke(this);
     }
 
     public GameObject GetPossessCharacter()

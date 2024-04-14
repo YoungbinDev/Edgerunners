@@ -24,6 +24,7 @@ public class ItemData : MonoBehaviour
         LoadData(Entity.Id);
     }
 
+    //Load default data
     private void LoadData(int GameAssetId)
     {
         ItemDBEntity Entity = ItemDB.GetDataDictionary()[GameAssetId];
