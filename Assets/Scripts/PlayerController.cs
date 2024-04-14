@@ -34,8 +34,8 @@ public class PlayerController : MonoBehaviour
         {
             if(PossessCharacter != null)
             {
-                OnUnPossessEvent.Invoke(PossessCharacter);
-                PossessCharacter.GetComponent<CharacterData>().OnUnPossessedEvent.Invoke();
+                OnUnPossessEvent?.Invoke(PossessCharacter);
+                PossessCharacter.GetComponent<CharacterData>().OnUnPossessedEvent?.Invoke();
                 PossessCharacter = null;
             }
 
@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
         }
 
         PossessCharacter = character;
-        OnPossessEvent.Invoke(character);
-        characterData.OnPossessedEvent.Invoke(this);
+        OnPossessEvent?.Invoke(character);
+        characterData.OnPossessedEvent?.Invoke(this);
     }
 
     public GameObject GetPossessCharacter()
@@ -84,6 +84,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        OnChangedPlayerInputActionValueEventMap[actionName].Invoke(actionName, value);
+        OnChangedPlayerInputActionValueEventMap[actionName]?.Invoke(actionName, value);
     }
 }

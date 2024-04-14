@@ -76,6 +76,8 @@ public class CharacterData : MonoBehaviour
                 Debug.LogWarning("Invalid stat format: " + stat);
             }
         }
+
+        OnChangedStatValueEvent?.Invoke();
     }
 
     private void InitializeComponents(CharacterDBEntity Entity)
@@ -87,5 +89,10 @@ public class CharacterData : MonoBehaviour
             case ECharacterType.NPC:
                 break;
         }
+    }
+
+    private void OnValidate()
+    {
+        OnChangedStatValueEvent?.Invoke();
     }
 }
