@@ -51,6 +51,16 @@ public class PlayerController : MonoBehaviour
         OnChangedPlayerInputActionValueEventMap[actionName] += Callback;
     }
 
+    public void RemoveCallbackToOnChangedInputActionValueEvent(string actionName, OnChangedInputActionValueEvent Callback)
+    {
+        if (!OnChangedPlayerInputActionValueEventMap.ContainsKey(actionName))
+        {
+            return;
+        }
+
+        OnChangedPlayerInputActionValueEventMap[actionName] -= Callback;
+    }
+
     private void OnChangedInputActionValue(string actionName, object value)
     {
         if(IsBlockInput)

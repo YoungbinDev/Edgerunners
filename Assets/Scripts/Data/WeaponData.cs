@@ -22,7 +22,7 @@ public class WeaponData : MonoBehaviour
 
         WeaponDB = GameManager.Instance.DataTableManager.DataTableMap["WeaponDB"] as WeaponDB;
 
-        CharacterData = this.transform.root.GetComponent<CharacterData>();
+        CharacterData = GlobalFunction.FindCharacterTransformFromParents(transform).GetComponent<CharacterData>();
 
         LoadData(Entity.GameAssetId);
     }
