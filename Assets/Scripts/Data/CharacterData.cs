@@ -10,12 +10,8 @@ public class CharacterData : MonoBehaviour
 {
     private CharacterDB CharacterDB;
 
-    public delegate void OnPossessed(PlayerController playerController);
-    public delegate void OnUnPossessed();
     public delegate void OnChangedStatValue();
 
-    public OnPossessed OnPossessedEvent;
-    public OnUnPossessed OnUnPossessedEvent;
     public OnChangedStatValue OnChangedStatValueEvent;
 
     [SerializeField]

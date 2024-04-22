@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(CharacterController))]
-public class TestPlayerPawn : MonoBehaviour
+public class TestPlayerPawn : PlayableCharacter
 {
     private CharacterController CharacterController;
 

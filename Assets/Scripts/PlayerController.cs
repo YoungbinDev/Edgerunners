@@ -8,15 +8,15 @@ public class PlayerController : MonoBehaviour
     private InputManager InputManager;
 
     public delegate void OnChangedInputActionValueEvent(string actionName, object value);
-    public delegate void OnPossess(GameObject character);
-    public delegate void OnUnPossess(GameObject character);
+    public delegate void OnPossess(PlayableCharacter character);
+    public delegate void OnUnPossess(PlayableCharacter character);
 
     private Dictionary<string, OnChangedInputActionValueEvent> OnChangedPlayerInputActionValueEventMap = new Dictionary<string, OnChangedInputActionValueEvent>();
     public OnPossess OnPossessEvent;
     public OnUnPossess OnUnPossessEvent;
 
     [SerializeField]
-    private GameObject PossessCharacter;
+    private PlayableCharacter PossessCharacter;
     [SerializeField]
     private bool IsBlockInput;
 
@@ -36,27 +36,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetPossessCharacter(GameObject character)
+    public void SetPossessCharacter(PlayableCharacter character)
     {
-        CharacterData characterData = character.GetComponent<CharacterData>();
-        if (characterData == null)
+        if (PossessCharacter != null)
         {
-            if(PossessCharacter != null)
-            {
-                OnUnPossessEvent?.Invoke(PossessCharacter);
-                PossessCharacter.GetComponent<CharacterData>().OnUnPossessedEvent?.Invoke();
-                PossessCharacter = null;
-            }
+            PossessCharacter.UnPossessed();
+            OnUnPossessEvent?.Invoke(PossessCharacter);
+            PossessCharacter = null;
+        }
 
+        if(character == null)
+        {
             return;
         }
 
         PossessCharacter = character;
+        PossessCharacter.OnPossessed(this);
         OnPossessEvent?.Invoke(character);
-        characterData.OnPossessedEvent?.Invoke(this);
     }
 
-    public GameObject GetPossessCharacter()
+    public PlayableCharacter GetPossessCharacter()
     {
         return PossessCharacter;
     }
