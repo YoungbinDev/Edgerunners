@@ -27,6 +27,15 @@ public class PlayerController : MonoBehaviour
         InputManager.BindFunction("Player", "Jump", OnChangedInputActionValue);
     }
 
+    private void OnDestroy()
+    {
+        if(InputManager != null)
+        {
+            InputManager.UnBindFunction("Player", "Movement", OnChangedInputActionValue);
+            InputManager.UnBindFunction("Player", "Jump", OnChangedInputActionValue);
+        }
+    }
+
     public void SetPossessCharacter(GameObject character)
     {
         CharacterData characterData = character.GetComponent<CharacterData>();

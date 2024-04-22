@@ -47,6 +47,28 @@ public class InputManager : MonoBehaviour
         action.canceled += context => Callback(actionName, context.ReadValueAsObject());
     }
 
+    public void UnBindFunction(string actionMapName, string actionName, OnChangedInputActionValueEvent Callback)
+    {
+        var actionMap = InputActions.FindActionMap(actionMapName);
+
+        if (actionMap == null)
+        {
+            Debug.LogWarning($"ActionMap '{actionMap}' not found.");
+            return;
+        }
+
+        var action = actionMap.FindAction(actionName);
+
+        if (action == null)
+        {
+            Debug.LogWarning($"Action '{actionName}' not found.");
+            return;
+        }
+
+        action.performed -= context => Callback(actionName, context.ReadValueAsObject());
+        action.canceled -= context => Callback(actionName, context.ReadValueAsObject());
+    }
+
     public unsafe T GetInputActionValue<T>(string actionMapName, string actionName)
     {
         var actionMap = InputActions.FindActionMap(actionMapName);

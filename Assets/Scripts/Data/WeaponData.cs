@@ -40,6 +40,14 @@ public class WeaponData : MonoBehaviour
         LoadData(Entity.GameAssetId);
     }
 
+    private void OnDestroy()
+    {
+        if (CharacterData != null)
+        {
+            CharacterData.OnChangedStatValueEvent -= OnChangedCharacterDataStatValue;
+        }
+    }
+
     //Load default data
     private void LoadData(int GameAssetId)
     {
