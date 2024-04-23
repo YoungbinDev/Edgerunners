@@ -1,36 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class TestPlayerPawn : PlayableCharacter
 {
+    private InputManager InputManager;
     private CharacterController CharacterController;
 
     [SerializeField]
     private float PlayerSpeed = 2.0f;
     private Vector2 MoveInput;
 
-    private PlayerController PlayerController;
-
     // Start is called before the first frame update
     private void Start()
     {
-        PlayerController = GameManager.Instance.PlayerController;
-        PlayerController.AddCallbackToOnChangedInputActionValueEvent("Movement", OnMove);
-        PlayerController.AddCallbackToOnChangedInputActionValueEvent("Jump", OnJump);
-
+        InputManager = GameManager.Instance.InputManager;
         CharacterController = GetComponent<CharacterController>();
-    }
 
-    private void OnDestroy()
-    {
-        if(PlayerController != null)
-        {
-            PlayerController.RemoveCallbackToOnChangedInputActionValueEvent("Movement", OnMove);
-            PlayerController.RemoveCallbackToOnChangedInputActionValueEvent("Jump", OnJump);
-        }
+        //TODO: 빙의 테스트용이므로 지워야함
+        GameManager.Instance.PlayerController.SetPossessCharacter(this);
     }
 
     private void Update()
@@ -40,18 +31,26 @@ public class TestPlayerPawn : PlayableCharacter
         CharacterController.Move(moveDirection * Time.deltaTime * PlayerSpeed);
     }
 
-    void OnJump(string actionName, object value)
+    void OnJump(InputAction.CallbackContext context)
     {
-        if(value == null)
-        {
-            return;
-        }
-
-        Debug.Log("Jump");
+        Debug.Log(context.ReadValue<float>());
     }
 
-    void OnMove(string actionName, object value)
+    void OnMove(InputAction.CallbackContext context)
     {
-        MoveInput = value != null ? (Vector2)value : Vector2.zero;
+        MoveInput = context.ReadValue<Vector2>();
+        Debug.Log(context.ReadValue<Vector2>());
+    }
+
+    protected override void BindInputSettings()
+    {
+        InputManager.BindFunction("Player", "Movement", OnMove);
+        InputManager.BindFunction("Player", "Jump", OnJump);
+    }
+
+    protected override void UnBindInputSettings()
+    {
+        InputManager.UnBindFunction("Player", "Movement", OnMove);
+        InputManager.UnBindFunction("Player", "Jump", OnJump);
     }
 }

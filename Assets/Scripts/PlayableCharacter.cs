@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class PlayableCharacter : MonoBehaviour
 {
-    private PlayerController PlayerController;
+    protected PlayerController PlayerController;
 
-    public void OnPossessed(PlayerController playerController)
+    protected virtual void BindInputSettings() { }
+    protected virtual void UnBindInputSettings() { }
+
+    protected virtual void OnDestroy()
     {
-        PlayerController = playerController;
+        if (PlayerController != null)
+        {
+            PlayerController.SetPossessCharacter(null);
+        }
     }
 
-    public void UnPossessed()
+    public virtual void OnPossessed(PlayerController playerController)
     {
+        PlayerController = playerController;
+        BindInputSettings();
+    }
+
+    public virtual void OnUnPossessed()
+    {
+        UnBindInputSettings();
         PlayerController = null;
     }
 }

@@ -2,7 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static PlayerController;
+using static UnityEngine.InputSystem.InputAction;
 
 
 public class InputManager : MonoBehaviour
@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
         InputActions.Disable();
     }
 
-    public void BindFunction(string actionMapName, string actionName, OnChangedInputActionValueEvent Callback)
+    public void BindFunction(string actionMapName, string actionName, Action<CallbackContext> Callback)
     {
         var actionMap = InputActions.FindActionMap(actionMapName);
 
@@ -43,11 +43,11 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        action.performed += context => Callback(actionName, context.ReadValueAsObject());
-        action.canceled += context => Callback(actionName, context.ReadValueAsObject());
+        action.performed += Callback;
+        action.canceled += Callback;
     }
 
-    public void UnBindFunction(string actionMapName, string actionName, OnChangedInputActionValueEvent Callback)
+    public void UnBindFunction(string actionMapName, string actionName, Action<CallbackContext> Callback)
     {
         var actionMap = InputActions.FindActionMap(actionMapName);
 
@@ -65,8 +65,8 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        action.performed -= context => Callback(actionName, context.ReadValueAsObject());
-        action.canceled -= context => Callback(actionName, context.ReadValueAsObject());
+        action.performed -= Callback;
+        action.canceled -= Callback;
     }
 
     public unsafe T GetInputActionValue<T>(string actionMapName, string actionName)
