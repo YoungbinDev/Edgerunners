@@ -12,17 +12,29 @@ public class InputManager : MonoBehaviour
     public void Init()
     {
         InputActions = GameManager.Instance.GameFeatureManager.GameFeature.InputActions;
-        ActivateInput();
+        ActivateAllInput();
     }
 
-    public void ActivateInput()
+    public void ActivateAllInput()
     {
         InputActions.Enable();
     }
 
-    public void DeactivateInput()
+    public void ActivateInput(string actionMapName)
+    {
+        var actionMap = InputActions.FindActionMap(actionMapName);
+        actionMap.Enable();
+    }
+
+    public void DeactivateAllInput()
     {
         InputActions.Disable();
+    }
+
+    public void DeactivateInput(string actionMapName)
+    {
+        var actionMap = InputActions.FindActionMap(actionMapName);
+        actionMap.Disable();
     }
 
     public void BindFunction(string actionMapName, string actionName, Action<CallbackContext> Callback)

@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public delegate void OnPossess(PlayableCharacter character);
-    public delegate void OnUnPossess(PlayableCharacter character);
+    public delegate void OnPossess(Pawn character);
+    public delegate void OnUnPossess(Pawn character);
 
     public OnPossess OnPossessEvent;
     public OnUnPossess OnUnPossessEvent;
 
     [SerializeField]
-    private PlayableCharacter PossessCharacter;
+    private Pawn PossessCharacter;
 
-    public void SetPossessCharacter(PlayableCharacter character)
+    public void SetPossessCharacter(Pawn character)
     {
         if (PossessCharacter != null)
         {
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         OnPossessEvent?.Invoke(character);
     }
 
-    public PlayableCharacter GetPossessCharacter()
+    public Pawn GetPossessCharacter()
     {
         return PossessCharacter;
     }

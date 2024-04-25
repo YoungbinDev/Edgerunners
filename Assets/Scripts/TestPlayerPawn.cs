@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class TestPlayerPawn : PlayableCharacter
+public class TestPlayerPawn : Pawn
 {
     private InputManager InputManager;
     private CharacterController CharacterController;
