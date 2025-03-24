@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef94c3afa6a7264693a13efa6a3f626, type: 3}
+  m_Name: GameFeature_DefaaultGame
+  m_EditorClassIdentifier: 
+  DBList:
+  - {fileID: 11400000, guid: eb4c3c1ed9b15fe4cbc51ff1e3081dc1, type: 2}
+  - {fileID: 11400000, guid: b941a390cd5333b45afba01197244308, type: 2}
+  - {fileID: 11400000, guid: 4744ebb9f43f8104fab812aca942718d, type: 2}
+  - {fileID: 11400000, guid: ab0f586c4dcb12647a891779f373c0ad, type: 2}
+  - {fileID: 11400000, guid: e5f8be35406a8594db6a3a40cb098659, type: 2}
+  - {fileID: 11400000, guid: a398a2635eabbb548b382bb435993b3d, type: 2}
+  - {fileID: 11400000, guid: 117cc67b15cd25643a5faa575ba8f2e4, type: 2}
+  ActionDataList: []
+  InputActions: {fileID: -944628639613478452, guid: 1b79f49f7e106234ba32d48c1bc7a907,
+    type: 3}
+  OptionData: {fileID: 0}
+  references:
+    version: 2
+    RefIds: []

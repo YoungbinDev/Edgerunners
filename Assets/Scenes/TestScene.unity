@@ -674,6 +674,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5d19437b5a3f98047aafe531c4381f34,
         type: 2}
+    - target: {fileID: 5709339881762936768, guid: bfc0effa95dca4f45962691efc2f94d2,
+        type: 3}
+      propertyPath: m_Name
+      value: OptionManager
+      objectReference: {fileID: 0}
     - target: {fileID: 7165102521546636848, guid: bfc0effa95dca4f45962691efc2f94d2,
         type: 3}
       propertyPath: m_Name

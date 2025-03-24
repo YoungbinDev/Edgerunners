@@ -29,7 +29,7 @@ public class CharacterData : MonoBehaviour
 
     public void Init(GameAssetDBEntity Entity)
     {
-        if (GameManager.Instance.GameFeatureManager == null)
+        if (GameManager.Instance.DataTableManager == null)
         {
             return;
         }

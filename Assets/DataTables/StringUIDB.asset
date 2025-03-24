@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8401f7c34c83da8468368de9c08d76b5, type: 3}
+  m_Name: StringUIDB
+  m_EditorClassIdentifier: 
+  Entities:
+  - StringId: StringId_Play
+    Korean: "\uC2DC\uC791"
+    English: Play
+  - StringId: StringId_Character
+    Korean: "\uCE90\uB9AD\uD130"
+    English: Character
+  - StringId: StringId_Options
+    Korean: "\uC635\uC158"
+    English: Options
+  - StringId: StringId_Exit
+    Korean: "\uB098\uAC00\uAE30"
+    English: Exit

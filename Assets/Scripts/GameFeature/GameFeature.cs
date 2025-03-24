@@ -13,8 +13,8 @@ public class GameFeature : ScriptableObject
     private Dictionary<string, ScriptableObject> DBMap;
 
     public List<ActionData> ActionDataList = new List<ActionData>();
-
     public InputActionAsset InputActions;
+    public OptionData OptionData;
 
     public Dictionary<string, ScriptableObject> GetDataDictionary()
     {

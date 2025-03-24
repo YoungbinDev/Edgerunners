@@ -55,3 +55,24 @@ public class ConsumableDBEntity
     public float Duration;
     public float Cooldown;
 }
+
+[System.Serializable]
+public class StringUIDBEntity
+{
+    public string StringId;
+    public string Korean;
+    public string English;
+
+    public string GetLocalizedString(ELanguageType language)
+    {
+        switch (language)
+        {
+            case ELanguageType.Korean:
+                return Korean;
+            case ELanguageType.English:
+                return English;
+            default:
+                return Korean;
+        }
+    }
+}
