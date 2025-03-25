@@ -64,6 +64,7 @@ public class StringUIText : MonoBehaviour
         }
         else
         {
+#if UNITY_EDITOR
             var StringUIDB = AssetDatabase.LoadAssetAtPath<StringUIDB>("Assets/DataTables/StringUIDB.asset");
             if (StringUIDB == null)
             {
@@ -78,6 +79,7 @@ public class StringUIText : MonoBehaviour
             }
 
             this.GetComponent<TextMeshProUGUI>().text = StringUIDB.GetDataDictionary()[StringId].GetLocalizedString(ELanguageType.English);
+#endif
         }
     }
 

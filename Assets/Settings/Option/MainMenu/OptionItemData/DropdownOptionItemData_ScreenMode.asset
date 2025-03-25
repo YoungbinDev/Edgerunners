@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DropdownOptionItemData_ScreenMode
   m_EditorClassIdentifier: 
   OptionId: 6
-  LabelStringId: StringId_Resolution
+  LabelStringId: StringId_ScreenMode
   Items:
   - ExclusiveFullScreen
   - FullScreenWindow

@@ -47,7 +47,19 @@ public class OptionApplier : MonoBehaviour
 
     public static void ApplyResolution(object value)
     {
-        if (value is not int index || index < 0 || index >= Screen.resolutions.Length)
+        if (value is not int index)
+        {
+            if (value is long index_long)
+            {
+                index = Convert.ToInt32(index_long);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        if (index < 0 || index >= Screen.resolutions.Length)
             return;
 
         var optionData = GameManager.Instance.GameFeatureManager.GameFeature.OptionData;
@@ -90,13 +102,22 @@ public class OptionApplier : MonoBehaviour
             Screen.fullScreenMode = (FullScreenMode)screenMode;
             Debug.Log($"[OptionApplier] ScreenMode 利侩: {(FullScreenMode)screenMode}");
         }
+        else if(value is long screenMode_long)
+        {
+            Screen.fullScreenMode = (FullScreenMode)screenMode_long;
+            Debug.Log($"[OptionApplier] ScreenMode 利侩: {(FullScreenMode)screenMode_long}");
+        }
     }
 
     private static void ApplyLanguage(object value)
     {
-        if (value is ELanguageType lang)
+        if (value is int lang)
         {
-            Debug.Log($"[OptionApplier] Language 利侩: {lang}");
+            Debug.Log($"[OptionApplier] Language 利侩: {(ELanguageType)lang}");
+        }
+        else if (value is long lang_long)
+        {
+            Debug.Log($"[OptionApplier] Language 利侩: {(ELanguageType)lang_long}");
         }
     }
 }

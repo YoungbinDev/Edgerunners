@@ -33,7 +33,7 @@ public class GameFeature : ScriptableObject
     [Serializable]
     public struct ActionData
     {
-        [SerializeField, ReadOnly]
+        [SerializeField]
         private GameFeatureActionType ActionType;
         [SerializeReference]
         public GameFeatureAction GameFeatureAction;
