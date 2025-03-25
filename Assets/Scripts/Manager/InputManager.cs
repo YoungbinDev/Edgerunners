@@ -11,17 +11,7 @@ public class InputManager : MonoBehaviour
 
     public void Init()
     {
-        if (GameManager.Instance.GameFeatureManager == null)
-        {
-            return;
-        }
-
-        if (GameManager.Instance.GameFeatureManager.GameFeature == null)
-        {
-            return;
-        }
-
-        if (GameManager.Instance.GameFeatureManager.GameFeature.InputActions == null)
+        if (GameManager.Instance?.GameFeatureManager?.GameFeature?.InputActions == null)
         {
             return;
         }

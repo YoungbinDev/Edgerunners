@@ -11,12 +11,7 @@ public class GameAssetManager : MonoBehaviour
 
     public void Init()
     {
-        if(GameManager.Instance.DataTableManager == null)
-        {
-            return;
-        }
-
-        if (GameManager.Instance.DataTableManager.DataTableMap == null)
+        if (GameManager.Instance?.DataTableManager?.DataTableMap == null)
         {
             return;
         }

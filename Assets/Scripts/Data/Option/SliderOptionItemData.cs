@@ -8,4 +8,6 @@ public class SliderOptionItemData : OptionItemData
     public float MinValue;
     public float DefaultValue;
     public float MaxValue;
+
+    public override object GetDefaultValue() => DefaultValue;
 }

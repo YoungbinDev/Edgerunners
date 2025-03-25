@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: OptionData_Mainmenu
   m_EditorClassIdentifier: 
   Groups:
-  - GroupName: General
+  - GroupName: StringId_General
     Options:
     - {fileID: 11400000, guid: cebd582c162b3ea4f935a4f3af003d37, type: 2}
-  - GroupName: Graphic
+  - GroupName: StringId_Graphic
     Options:
+    - {fileID: 11400000, guid: 7589efd10e331f84bbbb5ff565921f5b, type: 2}
     - {fileID: 11400000, guid: 1c48796500e66cb4b8fb470d578a6d20, type: 2}
     - {fileID: 11400000, guid: c83f87b142fd7344797d8593540918b0, type: 2}
-  - GroupName: Control
+  - GroupName: StringId_Control
     Options:
     - {fileID: 11400000, guid: 59019f21996ec4844ad4c8ecf946b3e3, type: 2}

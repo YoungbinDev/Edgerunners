@@ -19,4 +19,4 @@ MonoBehaviour:
   - Medium
   - High
   - Ultra
-  DefaultItemIndex: 2
+  DefaultValue: 2

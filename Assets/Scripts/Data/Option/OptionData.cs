@@ -11,6 +11,8 @@ public enum EOptionId
     Resolution,
     MouseSensitivity,
     GraphicsQuality,
+    MasterVolume,
+    ScreenMode,
 }
 
 [Serializable]
@@ -24,4 +26,10 @@ public class OptionGroupData
 public class OptionData : ScriptableObject
 {
     public List<OptionGroupData> Groups = new();
+}
+
+[Serializable]
+public class OptionSaveData
+{
+    public Dictionary<EOptionId, object> values = new();
 }

@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d2b184d847e1f84c8d8de8860e31303, type: 3}
-  m_Name: DropdownOptionItemData_Language
+  m_Name: DropdownOptionItemData_ScreenMode
   m_EditorClassIdentifier: 
-  OptionId: 1
-  LabelStringId: StrindId_Language
+  OptionId: 6
+  LabelStringId: StringId_Resolution
   Items:
-  - English
-  - "\uD55C\uAE00"
-  DefaultValue: 0
+  - ExclusiveFullScreen
+  - FullScreenWindow
+  - MaximizedWindow
+  - Windowed
+  DefaultValue: 1

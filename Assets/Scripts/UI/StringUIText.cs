@@ -22,11 +22,33 @@ public class StringUIText : MonoBehaviour
 
     void Start()
     {
+        OptionApplier.OnChangedOption += OnChangedOptionValue;
+
+        SetStringUI(StringId);
+    }
+
+    void OnDestroy()
+    {
+        OptionApplier.OnChangedOption -= OnChangedOptionValue;
+    }
+
+    private void OnChangedOptionValue(EOptionId optionId, object value)
+    {
+        if(!optionId.Equals(EOptionId.Language))
+        {
+            return;
+        }
+
         SetStringUI(StringId);
     }
 
     public void SetStringUI(string stringId)
     {
+        if (StringId == null)
+        {
+            return;
+        }
+
         StringId = stringId;
 
         if (Application.isPlaying)
@@ -37,7 +59,8 @@ public class StringUIText : MonoBehaviour
                 return;
             }
 
-            //this.GetComponent<TextMeshProUGUI>().text = (GameManager.Instance.DataTableManager.DataTableMap["StringUIDB"] as StringUIDB).GetDataDictionary()[stringId].GetLocalizedString(GameManager.Instance.GameFeatureManager.GameFeature.OptionData.Groups["General"].Options.LanguageType);
+            ELanguageType languageType = (ELanguageType)GameManager.Instance.OptionManager.GetValue<int>(EOptionId.Language);
+            this.GetComponent<TextMeshProUGUI>().text = (GameManager.Instance.DataTableManager.DataTableMap["StringUIDB"] as StringUIDB).GetDataDictionary()[stringId].GetLocalizedString(languageType);
         }
         else
         {
@@ -60,40 +83,19 @@ public class StringUIText : MonoBehaviour
 
     private bool IsValid(string stringId)
     {
-        if (stringId == null)
-        {
-            return false;
-        }
+        var gameManager = GameManager.Instance;
+        if (gameManager == null) return false;
 
-        if (GameManager.Instance.DataTableManager == null)
-        {
-            return false;
-        }
+        var dataTableMap = gameManager.DataTableManager?.DataTableMap;
+        if (dataTableMap == null) return false;
 
-        if (GameManager.Instance.DataTableManager.DataTableMap == null)
-        {
-            return false;
-        }
+        if (!dataTableMap.TryGetValue("StringUIDB", out var table)) return false;
+        if (table is not StringUIDB stringDb) return false;
 
-        if (!GameManager.Instance.DataTableManager.DataTableMap.ContainsKey("StringUIDB"))
-        {
-            return false;
-        }
+        if (!stringDb.GetDataDictionary().ContainsKey(stringId)) return false;
 
-        if (!(GameManager.Instance.DataTableManager.DataTableMap["StringUIDB"] as StringUIDB).GetDataDictionary().ContainsKey(stringId))
-        {
-            return false;
-        }
-
-        if(GameManager.Instance.GameFeatureManager.GameFeature == null)
-        {
-            return false;
-        }
-
-        if(GameManager.Instance.GameFeatureManager.GameFeature.OptionData == null)
-        {
-            return false;
-        }
+        var optionData = gameManager.GameFeatureManager?.GameFeature?.OptionData;
+        if (optionData == null) return false;
 
         return true;
     }

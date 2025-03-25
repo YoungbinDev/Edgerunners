@@ -23,18 +23,12 @@ public class OptionUI : MonoBehaviour
 
     void OnEnable()
     {
-        if(GameManager.Instance.GameFeatureManager == null)
-        {
-            return;
-        }
-
-        if(GameManager.Instance.GameFeatureManager.GameFeature == null)
+        if(GameManager.Instance?.GameFeatureManager?.GameFeature == null)
         {
             return;
         }
 
         MakeUI(GameManager.Instance.GameFeatureManager.GameFeature.OptionData);
-        LoadOptionData();
     }
 
     private void ClearUI()
@@ -73,11 +67,6 @@ public class OptionUI : MonoBehaviour
         OnClickTabMenu(0);
     }
 
-    private void LoadOptionData()
-    {
-
-    }
-
     private void CreateTabButton(string label, int index)
     {
         var tab = Instantiate(TabButtonPrefab, TabMenuLayout.transform);
@@ -111,7 +100,11 @@ public class OptionUI : MonoBehaviour
             var dropdownComponent = ui.GetComponentInChildren<TMP_Dropdown>();
             dropdownComponent.ClearOptions();
             dropdownComponent.AddOptions(dropdown.Items);
-            dropdownComponent.value = dropdown.DefaultItemIndex;
+            dropdownComponent.value = GameManager.Instance.OptionManager.GetValue<int>(option.OptionId);
+            dropdownComponent.onValueChanged.AddListener((value) =>
+            {
+                GameManager.Instance.OptionManager.SetValue(option.OptionId, value, true);
+            });
 
             return ui;
         }

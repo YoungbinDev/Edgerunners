@@ -6,4 +6,6 @@ using UnityEngine;
 public class ToggleOptionItemData : OptionItemData
 {
     public bool DefaultValue;
+
+    public override object GetDefaultValue() => DefaultValue;
 }
