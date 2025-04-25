@@ -47,31 +47,20 @@ public class OptionApplier : MonoBehaviour
 
     public static void ApplyResolution(object value)
     {
-        if (value is not int index)
-        {
-            if (value is long index_long)
-            {
-                index = Convert.ToInt32(index_long);
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        if (index < 0 || index >= Screen.resolutions.Length)
+        int index;
+        if (value is int i)
+            index = i;
+        else if (value is long l)
+            index = Convert.ToInt32(l);
+        else
             return;
 
         var optionData = GameManager.Instance.GameFeatureManager.GameFeature.OptionData;
-
-        var resolutionOption = optionData.Groups
-            .SelectMany(group => group.Options)
-            .FirstOrDefault(opt => opt.OptionId == EOptionId.Resolution) as DropdownOptionItemData;
-
-        if (resolutionOption == null || index >= resolutionOption.Items.Count)
+        var items = GlobalFunction.GetOptionItems<string>(optionData, EOptionId.Resolution);
+        if (items == null || index >= items.Count)
             return;
 
-        if (TryParseResolution(resolutionOption.Items[index], out int width, out int height))
+        if (TryParseResolution(items[index], out int width, out int height))
         {
             FullScreenMode fullScreenMode = (FullScreenMode)GameManager.Instance.OptionManager.GetValue<int>(EOptionId.ScreenMode);
             Screen.SetResolution(width, height, fullScreenMode);

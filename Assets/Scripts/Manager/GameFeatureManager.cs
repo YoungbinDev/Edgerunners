@@ -15,7 +15,7 @@ public class AssetReferenceGameFeature : AssetReferenceT<GameFeature>
 public class GameFeatureManager : MonoBehaviour
 {
     [SerializeField] 
-    private AssetReferenceGameFeature GameFeatureAssetReference;
+    private AssetReferenceGameFeature GameFeatureAssetRef;
 
     [HideInInspector]
     public GameFeature GameFeature;
@@ -25,7 +25,7 @@ public class GameFeatureManager : MonoBehaviour
     {
         if (handle.IsValid()) return;
 
-        handle = GameFeatureAssetReference.LoadAssetAsync<GameFeature>();
+        handle = GameFeatureAssetRef.LoadAssetAsync<GameFeature>();
         handle.WaitForCompletion();
 
         if (handle.Status == AsyncOperationStatus.Succeeded)

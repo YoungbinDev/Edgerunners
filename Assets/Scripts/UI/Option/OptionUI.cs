@@ -1,34 +1,101 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class OptionUI : MonoBehaviour
 {
     [SerializeField]
+    private AssetReferenceGameObject TabButtonPrefabAssetRef;
     private GameObject TabButtonPrefab;
+    private AsyncOperationHandle<GameObject> handle_TabButton;
+
     [SerializeField]
+    private AssetReferenceGameObject DropdownPrefabAssetRef;
     private GameObject DropdownPrefab;
+    private AsyncOperationHandle<GameObject> handle_Dropdown;
+
+    private bool isAssetsLoaded = false;
+
     [SerializeField]
     private HorizontalOrVerticalLayoutGroup TabMenuLayout;
     [SerializeField]
     private HorizontalOrVerticalLayoutGroup ContentsLayout;
     [SerializeField]
     private int CurrentTabMenuIndex = 0;
+
     private Dictionary<int, List<GameObject>> OptionUIDictionary = new();
+
+    private void OnDestroy()
+    {
+        UnLoadAssets();
+    }
 
     void OnEnable()
     {
+        if (!isAssetsLoaded)
+        {
+            LoadAssets();
+        }
+
         if(GameManager.Instance?.GameFeatureManager?.GameFeature == null)
         {
             return;
         }
 
         MakeUI(GameManager.Instance.GameFeatureManager.GameFeature.OptionData);
+    }
+
+    private void LoadAssets()
+    {
+        if (!handle_TabButton.IsValid())
+        {
+            handle_TabButton = TabButtonPrefabAssetRef.LoadAssetAsync<GameObject>();
+            handle_TabButton.WaitForCompletion();
+            if (handle_TabButton.Status == AsyncOperationStatus.Succeeded)
+            {
+                TabButtonPrefab = handle_TabButton.Result;
+            }
+        }
+
+        if (!handle_Dropdown.IsValid())
+        {
+            handle_Dropdown = DropdownPrefabAssetRef.LoadAssetAsync<GameObject>();
+            handle_Dropdown.WaitForCompletion();
+            if (handle_Dropdown.Status == AsyncOperationStatus.Succeeded)
+            {
+                DropdownPrefab = handle_Dropdown.Result;
+            }
+        }
+
+        isAssetsLoaded = true;
+    }
+
+    private void UnLoadAssets()
+    {
+        if (!isAssetsLoaded) return;
+
+        if (handle_TabButton.IsValid())
+        {
+            if (handle_TabButton.Status == AsyncOperationStatus.Succeeded)
+            {
+                Addressables.Release(handle_TabButton);
+            }
+        }
+
+        if (handle_Dropdown.IsValid())
+        {
+            if (handle_Dropdown.Status == AsyncOperationStatus.Succeeded)
+            {
+                Addressables.Release(handle_Dropdown);
+            }
+        }
+
+        isAssetsLoaded = false;
     }
 
     private void ClearUI()
@@ -69,6 +136,8 @@ public class OptionUI : MonoBehaviour
 
     private void CreateTabButton(string label, int index)
     {
+        if (TabButtonPrefab == null) return;
+
         var tab = Instantiate(TabButtonPrefab, TabMenuLayout.transform);
         tab.GetComponentInChildren<StringUIText>().SetStringUI(label);
         tab.GetComponent<Button>().onClick.AddListener(() => OnClickTabMenu(index));
@@ -80,7 +149,7 @@ public class OptionUI : MonoBehaviour
 
         foreach (var option in options)
         {
-            GameObject optionUI = CreateOptionUI(option);
+            GameObject optionUI = CreateOptionItemUI(option);
             if (optionUI == null) continue;
 
             optionUI.SetActive(false);
@@ -90,21 +159,19 @@ public class OptionUI : MonoBehaviour
         OptionUIDictionary.Add(groupIndex, uiList);
     }
 
-    private GameObject CreateOptionUI(OptionItemData option)
+    private GameObject CreateOptionItemUI(OptionItemData option)
     {
-        if (option is DropdownOptionItemData dropdown)
+        if (option is DropdownOptionItemData)
         {
+            if (DropdownPrefab == null) return null;
+
             var ui = Instantiate(DropdownPrefab, ContentsLayout.transform);
             ui.GetComponentInChildren<StringUIText>().SetStringUI(option.LabelStringId);
 
-            var dropdownComponent = ui.GetComponentInChildren<TMP_Dropdown>();
-            dropdownComponent.ClearOptions();
-            dropdownComponent.AddOptions(dropdown.Items);
-            dropdownComponent.value = GameManager.Instance.OptionManager.GetValue<int>(option.OptionId);
-            dropdownComponent.onValueChanged.AddListener((value) =>
-            {
-                GameManager.Instance.OptionManager.SetValue(option.OptionId, value, true);
-            });
+            var dropdownComponent = ui.GetComponent<DropdownOptionItemUI>();
+            int currentValue = GameManager.Instance.OptionManager.GetValue<int>(option.OptionId);
+
+            dropdownComponent.Initialize(option, currentValue);
 
             return ui;
         }

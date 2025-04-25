@@ -427,6 +427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4703210321992770281, guid: bfc0effa95dca4f45962691efc2f94d2,
         type: 3}
+      propertyPath: GameFeatureAssetRef.m_AssetGUID
+      value: a0b49b1d4119ce94e92098f146adc177
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703210321992770281, guid: bfc0effa95dca4f45962691efc2f94d2,
+        type: 3}
       propertyPath: GameFeatureAssetReference.m_AssetGUID
       value: a0b49b1d4119ce94e92098f146adc177
       objectReference: {fileID: 0}

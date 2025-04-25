@@ -877,10 +877,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab097130740e3ca4598bb2bbf72b6819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TabButtonPrefab: {fileID: 8719583241808920961, guid: 0799386df28be5f4a88232070315463f,
-    type: 3}
-  DropdownPrefab: {fileID: 77822437643500098, guid: e88b7bbf676cc1f479abe5d91f247260,
-    type: 3}
+  TabButtonPrefabAssetRef:
+    m_AssetGUID: 0799386df28be5f4a88232070315463f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  DropdownPrefabAssetRef:
+    m_AssetGUID: 797ace84acd341d41830634fefc790cf
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   TabMenuLayout: {fileID: 6687741789650921864}
   ContentsLayout: {fileID: 2320676046647246676}
   CurrentTabMenuIndex: 0

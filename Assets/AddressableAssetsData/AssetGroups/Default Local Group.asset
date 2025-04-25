@@ -16,7 +16,17 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: e0cddb5ae12b7f147a12dc54512997f6
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 797ace84acd341d41830634fefc790cf
+    m_Address: Assets/Art/UI/Option/Prefab/StringUIDropdown_Option.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0799386df28be5f4a88232070315463f
+    m_Address: Assets/Art/UI/Core/StringUIButton/Prefab/StringUIButton.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4c1ffca94d8425d4cb8fe81e7aa292d1, type: 2}
   m_SchemaSet:
