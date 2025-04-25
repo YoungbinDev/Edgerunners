@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Art
+  m_EditorClassIdentifier: 
+  m_GroupName: Art
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 89d81de521e06b648a9795a6cb44aa15
+  m_SerializeEntries:
+  - m_GUID: 5010cdf0a15ee7140a4e2ef479f1e75a
+    m_Address: Character01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b0b1835c155d7a41b3c6bbf3cdb288d
+    m_Address: Gun01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4c1ffca94d8425d4cb8fe81e7aa292d1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 32b271978f3d56b4ea274c98b943a71b, type: 2}
+    - {fileID: 11400000, guid: 78605d5e2c824c64981c7dbd2fa48c8d, type: 2}
