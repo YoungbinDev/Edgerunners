@@ -15,8 +15,8 @@ MonoBehaviour:
   OptionId: 6
   LabelStringId: StringId_ScreenMode
   Items:
-  - ExclusiveFullScreen
-  - FullScreenWindow
-  - MaximizedWindow
-  - Windowed
+  - StringId_ExclusiveFullScreen
+  - StringId_FullScreenWindow
+  - StringId_MaximizedWindow
+  - StringId_Windowed
   DefaultValue: 1

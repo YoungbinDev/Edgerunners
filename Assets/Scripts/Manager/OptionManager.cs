@@ -7,7 +7,7 @@ using System.Xml;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class OptionManager : MonoBehaviour
+public class OptionManager : ManagerBase
 {
     public OptionSaveData OriginalSaveData { get; private set; } = new();
     public OptionSaveData WorkingSaveData { get; private set; } = new();
@@ -23,7 +23,7 @@ public class OptionManager : MonoBehaviour
         return Path.Combine(Application.persistentDataPath, "option_save.json");
     }
 
-    public void Init()
+    public override void Init()
     {
         Load();
         Apply(false);
@@ -34,7 +34,7 @@ public class OptionManager : MonoBehaviour
         if (!File.Exists(GetPath()))
         {
             OriginalSaveData = new OptionSaveData();
-            foreach(var optionGroup in GameManager.Instance.GameFeatureManager.GameFeature.OptionData.Groups)
+            foreach(var optionGroup in GameManager.Instance.GetManager<GameFeatureManager>()?.GameFeature?.OptionData?.Groups)
             {
                 foreach(var Option in optionGroup.Options)
                 {
@@ -58,7 +58,7 @@ public class OptionManager : MonoBehaviour
         OriginalSaveData = Clone(WorkingSaveData);
     }
 
-    public void Apply(bool isSave)
+    private void Apply(bool isSave)
     {
         foreach (var (id, value) in WorkingSaveData.values)
         {
@@ -71,7 +71,7 @@ public class OptionManager : MonoBehaviour
         }
     }
 
-    public void Apply(EOptionId optionId, bool isSave)
+    private void Apply(EOptionId optionId, bool isSave)
     {
         OptionApplier.Apply(optionId, WorkingSaveData.values[optionId]);
 
@@ -111,27 +111,14 @@ public class OptionManager : MonoBehaviour
 
     public T GetDefaultValue<T>(EOptionId id)
     {
-        var optionData = GameManager.Instance?.GameFeatureManager?.GameFeature?.OptionData;
+        var optionData = GameManager.Instance.GetManager<GameFeatureManager>()?.GameFeature?.OptionData;
         if (optionData == null)
-            return default;
-
-        foreach (var group in optionData.Groups)
         {
-            foreach (var option in group.Options)
-            {
-                if (option.OptionId == id)
-                {
-                    if (option.GetDefaultValue() is T typedValue)
-                        return typedValue;
-
-                    Debug.LogWarning($"[Option] DefaultValue for {id} is not of type {typeof(T).Name}");
-                    return default;
-                }
-            }
+            Debug.LogWarning("[GetDefaultValue] optionData is missing.");
+            return default;
         }
 
-        Debug.LogWarning($"[Option] OptionId {id} not found in any group.");
-        return default;
+        return GlobalFunction.GetOptionDefaultValue<T>(optionData, id);
     }
 
     public void SetValue<T>(EOptionId id, T value, bool isApply)

@@ -5,18 +5,19 @@ using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 
-public class InputManager : MonoBehaviour
+public class InputManager : ManagerBase
 {
     private InputActionAsset InputActions;
 
-    public void Init()
+    public override void Init()
     {
-        if (GameManager.Instance?.GameFeatureManager?.GameFeature?.InputActions == null)
+        InputActions = GameManager.Instance.GetManager<GameFeatureManager>()?.GameFeature?.InputActions;
+        if(InputActions == null)
         {
+            Debug.LogWarning("[Init] InputActions is missing. Initialization aborted.");
             return;
         }
 
-        InputActions = GameManager.Instance.GameFeatureManager.GameFeature.InputActions;
         ActivateAllInput();
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 
 public class CharacterData : MonoBehaviour
@@ -29,12 +30,12 @@ public class CharacterData : MonoBehaviour
 
     public void Init(GameAssetDBEntity Entity)
     {
-        if (GameManager.Instance.DataTableManager == null)
+        CharacterDB = GameManager.Instance.GetManager<DataTableManager>()?.DataTableMap.TryGetValue("CharacterDB", out var table) == true ? table as CharacterDB : null;
+        if(CharacterDB == null)
         {
+            Debug.LogWarning("[Init] CharacterDB is missing. Initialization aborted.");
             return;
         }
-
-        CharacterDB = GameManager.Instance.DataTableManager.DataTableMap["CharacterDB"] as CharacterDB;
 
         LoadData(Entity.Id);
     }

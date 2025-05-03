@@ -15,6 +15,6 @@ MonoBehaviour:
   OptionId: 1
   LabelStringId: StrindId_Language
   Items:
-  - English
-  - "\uD55C\uAE00"
+  - StringId_English
+  - StringId_Korean
   DefaultValue: 0

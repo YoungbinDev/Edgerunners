@@ -12,7 +12,7 @@ public class AssetReferenceGameFeature : AssetReferenceT<GameFeature>
     }
 }
 
-public class GameFeatureManager : MonoBehaviour
+public class GameFeatureManager : ManagerBase
 {
     [SerializeField] 
     private AssetReferenceGameFeature GameFeatureAssetRef;
@@ -21,9 +21,19 @@ public class GameFeatureManager : MonoBehaviour
     public GameFeature GameFeature;
     private AsyncOperationHandle<GameFeature> handle;
 
-    public void Init()
+    public override void Init()
     {
-        if (handle.IsValid()) return;
+        if(GameFeatureAssetRef == null)
+        {
+            Debug.LogError("[Init] GameFeatureAssetRef is missing. Initialization aborted.");
+            return;
+        }
+
+        if (handle.IsValid())
+        {
+            Debug.LogWarning("[Init] handle is already running.");
+            return;
+        }
 
         handle = GameFeatureAssetRef.LoadAssetAsync<GameFeature>();
         handle.WaitForCompletion();

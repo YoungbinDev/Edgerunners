@@ -22,7 +22,11 @@ public class DropdownOptionItemUI : MonoBehaviour, IOptionItemUI
         optionId = data.OptionId;
         defaultValue = dropdownData.DefaultValue;
         dropdown.ClearOptions();
-        dropdown.AddOptions(dropdownData.Items);
+        foreach(string item in dropdownData.Items)
+        {
+            TMP_Dropdown.OptionData newOption = new TMP_Dropdown.OptionData(GlobalFunction.ConvertStringIdToText(item));
+            dropdown.options.Add(newOption);
+        }
         dropdown.value = currentValue is int val ? val : defaultValue;
         dropdown.onValueChanged.AddListener(OnValueChanged);
         resetButton.onClick.AddListener(() => ResetToDefault());
@@ -32,7 +36,7 @@ public class DropdownOptionItemUI : MonoBehaviour, IOptionItemUI
 
     private void OnValueChanged(int value)
     {
-        GameManager.Instance.OptionManager.SetValue(optionId, value, true);
+        GameManager.Instance.GetManager<OptionManager>()?.SetValue(optionId, value, true);
 
         UpdateResetButton();
     }

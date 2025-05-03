@@ -59,8 +59,8 @@ public class StringUIText : MonoBehaviour
                 return;
             }
 
-            ELanguageType languageType = (ELanguageType)GameManager.Instance.OptionManager.GetValue<int>(EOptionId.Language);
-            this.GetComponent<TextMeshProUGUI>().text = (GameManager.Instance.DataTableManager.DataTableMap["StringUIDB"] as StringUIDB).GetDataDictionary()[stringId].GetLocalizedString(languageType);
+            ELanguageType languageType = (ELanguageType)GameManager.Instance.GetManager<OptionManager>()?.GetValue<int>(EOptionId.Language);
+            this.GetComponent<TextMeshProUGUI>().text = (GameManager.Instance.GetManager<DataTableManager>()?.DataTableMap["StringUIDB"] as StringUIDB).GetDataDictionary()[stringId].GetLocalizedString(languageType);
         }
         else
         {
@@ -88,7 +88,7 @@ public class StringUIText : MonoBehaviour
         var gameManager = GameManager.Instance;
         if (gameManager == null) return false;
 
-        var dataTableMap = gameManager.DataTableManager?.DataTableMap;
+        var dataTableMap = gameManager.GetManager<DataTableManager>()?.DataTableMap;
         if (dataTableMap == null) return false;
 
         if (!dataTableMap.TryGetValue("StringUIDB", out var table)) return false;
@@ -96,7 +96,7 @@ public class StringUIText : MonoBehaviour
 
         if (!stringDb.GetDataDictionary().ContainsKey(stringId)) return false;
 
-        var optionData = gameManager.GameFeatureManager?.GameFeature?.OptionData;
+        var optionData = gameManager.GetManager<GameFeatureManager>()?.GameFeature?.OptionData;
         if (optionData == null) return false;
 
         return true;

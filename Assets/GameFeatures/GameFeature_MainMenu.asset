@@ -15,7 +15,8 @@ MonoBehaviour:
   DBList:
   - {fileID: 11400000, guid: 117cc67b15cd25643a5faa575ba8f2e4, type: 2}
   ActionDataList: []
-  InputActions: {fileID: 0}
+  InputActions: {fileID: -944628639613478452, guid: 2de1f2f1e3db1d74ab44c2268c005db0,
+    type: 3}
   OptionData: {fileID: 11400000, guid: cfd7f1362d4bef5499c28d31d5fa0fb8, type: 2}
   references:
     version: 2

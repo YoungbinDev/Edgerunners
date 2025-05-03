@@ -17,8 +17,19 @@ public class TestPlayerPawn : Pawn
     // Start is called before the first frame update
     private void Start()
     {
-        InputManager = GameManager.Instance.InputManager;
+        InputManager = GameManager.Instance.GetManager<InputManager>();
+        if(InputManager == null)
+        {
+            Debug.LogWarning("[Start] InputManager is missing. Initialization aborted.");
+            return;
+        }
+
         CharacterController = GetComponent<CharacterController>();
+        if(CharacterController == null)
+        {
+            Debug.LogWarning("[Start] CharacterController is missing. Initialization aborted.");
+            return;
+        }
 
         //TODO: 빙의 테스트용이므로 지워야함
         GameManager.Instance.PlayerController.SetPossessCharacter(this);

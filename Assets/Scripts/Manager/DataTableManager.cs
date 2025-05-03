@@ -2,22 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataTableManager : MonoBehaviour
+public class DataTableManager : ManagerBase
 {
     public Dictionary<string, ScriptableObject> DataTableMap;
 
-    public void Init()
+    public override void Init()
     {
-        if (GameManager.Instance.GameFeatureManager == null)
+        DataTableMap = GameManager.Instance.GetManager<GameFeatureManager>()?.GameFeature?.GetDataDictionary();
+        if(DataTableMap == null)
         {
+            Debug.LogWarning("[Init] DataTableMap is missing. Initialization aborted.");
             return;
         }
-
-        if (GameManager.Instance.GameFeatureManager.GameFeature == null)
-        {
-            return;
-        }
-
-        DataTableMap = GameManager.Instance.GameFeatureManager.GameFeature.GetDataDictionary();
     }
 }

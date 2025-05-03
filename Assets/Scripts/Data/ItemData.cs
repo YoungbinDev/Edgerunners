@@ -14,12 +14,12 @@ public class ItemData : MonoBehaviour
 
     public void Init(GameAssetDBEntity Entity)
     {
-        if (GameManager.Instance.GameFeatureManager == null)
+        ItemDB = GameManager.Instance.GetManager<DataTableManager>()?.DataTableMap.TryGetValue("ItemDB", out var table) == true ? table as ItemDB : null;
+        if(ItemDB == null) 
         {
+            Debug.LogWarning("[Init] ItemDB is missing. Initialization aborted.");
             return;
         }
-
-        ItemDB = GameManager.Instance.DataTableManager.DataTableMap["ItemDB"] as ItemDB;
 
         LoadData(Entity.Id);
     }

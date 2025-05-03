@@ -29,7 +29,7 @@ public class ToggleOptionItemUI : MonoBehaviour, IOptionItemUI
     }
     private void OnValueChanged(bool value)
     {
-        GameManager.Instance.OptionManager.SetValue(optionId, value, true);
+        GameManager.Instance.GetManager<OptionManager>()?.SetValue(optionId, value, true);
 
         UpdateResetButton();
     }

@@ -15,8 +15,8 @@ MonoBehaviour:
   OptionId: 4
   LabelStringId: StringId_GraphicsQuality
   Items:
-  - Low
-  - Medium
-  - High
-  - Ultra
+  - StringId_Low
+  - StringId_Medium
+  - StringId_High
+  - StringId_Ultra
   DefaultValue: 2

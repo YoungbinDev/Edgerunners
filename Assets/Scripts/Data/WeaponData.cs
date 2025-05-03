@@ -23,12 +23,12 @@ public class WeaponData : MonoBehaviour
 
     public void Init(ItemDBEntity Entity)
     {
-        if (GameManager.Instance.GameFeatureManager == null)
+        WeaponDB = GameManager.Instance.GetManager<DataTableManager>()?.DataTableMap["WeaponDB"] as WeaponDB;
+        if(WeaponDB == null)
         {
+            Debug.LogWarning("[Init] WeaponDB is missing. Initialization aborted.");
             return;
         }
-
-        WeaponDB = GameManager.Instance.DataTableManager.DataTableMap["WeaponDB"] as WeaponDB;
 
         Owner = GlobalFunction.FindCharacterTransformFromParents(transform);
         if(Owner != null)

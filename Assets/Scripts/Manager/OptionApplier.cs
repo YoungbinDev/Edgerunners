@@ -55,14 +55,23 @@ public class OptionApplier : MonoBehaviour
         else
             return;
 
-        var optionData = GameManager.Instance.GameFeatureManager.GameFeature.OptionData;
+        var optionData = GameManager.Instance.GetManager<GameFeatureManager>()?.GameFeature?.OptionData;
+        if(optionData == null)
+        {
+            Debug.LogWarning("[ApplyResolution] OptionData is missing.");
+            return;
+        }
+
         var items = GlobalFunction.GetOptionItems<string>(optionData, EOptionId.Resolution);
         if (items == null || index >= items.Count)
+        {
+            Debug.LogWarning("[ApplyResolution] Invalid items.");
             return;
+        }
 
         if (TryParseResolution(items[index], out int width, out int height))
         {
-            FullScreenMode fullScreenMode = (FullScreenMode)GameManager.Instance.OptionManager.GetValue<int>(EOptionId.ScreenMode);
+            FullScreenMode fullScreenMode = (FullScreenMode)GameManager.Instance.GetManager<OptionManager>()?.GetValue<int>(EOptionId.ScreenMode);
             Screen.SetResolution(width, height, fullScreenMode);
             Debug.Log($"[OptionApplier] Resolution Àû¿ë: {width}x{height} ({fullScreenMode})");
         }

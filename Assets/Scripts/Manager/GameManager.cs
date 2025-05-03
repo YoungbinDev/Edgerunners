@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+public abstract class ManagerBase : MonoBehaviour
+{
+    public abstract void Init();
+}
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
-    public GameFeatureManager GameFeatureManager;
-    public DataTableManager DataTableManager;
-    public GameAssetManager GameAssetManager;
-    public OptionManager OptionManager;
-    public InputManager InputManager;
+    [SerializeField] private List<ManagerBase> Managers;
 
     public PlayerController PlayerController;
 
@@ -43,11 +45,14 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //TODO: null 체크
-        GameFeatureManager.Init();
-        DataTableManager.Init();
-        GameAssetManager.Init();
-        OptionManager.Init();
-        InputManager.Init();
+        foreach (var manager in Managers)
+        {
+            manager?.Init();
+        }
+    }
+
+    public T GetManager<T>() where T : ManagerBase
+    {
+        return Managers.OfType<T>().FirstOrDefault();
     }
 }

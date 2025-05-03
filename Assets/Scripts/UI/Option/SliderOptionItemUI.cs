@@ -39,7 +39,7 @@ public class SliderOptionItemUI : MonoBehaviour, IOptionItemUI
     {
         float roundedValue = Mathf.Round(value / stepSize) * stepSize;
         slider.SetValueWithoutNotify(roundedValue); // 슬라이더를 정정된 값으로 되돌림
-        GameManager.Instance.OptionManager.SetValue(optionId, roundedValue, true);
+        GameManager.Instance.GetManager<OptionManager>()?.SetValue(optionId, roundedValue, true);
 
         UpdateValueText(roundedValue);
         UpdateResetButton();

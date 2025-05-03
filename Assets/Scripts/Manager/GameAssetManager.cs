@@ -5,29 +5,25 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class GameAssetManager : MonoBehaviour
+public class GameAssetManager : ManagerBase
 {
     private GameAssetDB GameAssetDB;
 
-    public void Init()
+    public override void Init()
     {
-        if (GameManager.Instance?.DataTableManager?.DataTableMap == null)
+        GameAssetDB = GameManager.Instance.GetManager<DataTableManager>()?.DataTableMap.TryGetValue("GameAssetDB", out var table) == true ? table as GameAssetDB : null;
+        if(GameAssetDB == null)
         {
+            Debug.LogWarning("[Init] GameAssetDB is missing. Initialization aborted.");
             return;
         }
-
-        if (!GameManager.Instance.DataTableManager.DataTableMap.ContainsKey("GameAssetDB"))
-        {
-            return;
-        }
-
-        GameAssetDB = GameManager.Instance.DataTableManager.DataTableMap["GameAssetDB"] as GameAssetDB;
     }
 
     public async Task<GameObject> LoadAssetUsingGameAssetId(int gameAssetId)
     {
         if(GameAssetDB == null)
         {
+            Debug.LogWarning("[LoadAssetUsingGameAssetId] GameAssetDB is missing.");
             return null;
         }
 

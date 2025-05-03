@@ -18,12 +18,12 @@ MonoBehaviour:
   m_GUID: 3830240ce31ac0c4285e020bb0d1fe7e
   m_SerializeEntries:
   - m_GUID: a0b49b1d4119ce94e92098f146adc177
-    m_Address: Assets/GameFeatures/GameFeature_MainMenu.asset
+    m_Address: GameFeature_MainMenu
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5d19437b5a3f98047aafe531c4381f34
-    m_Address: Assets/GameFeatures/GameFeature_DefaaultGame.asset
+    m_Address: GameFeature_DefaaultGame
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

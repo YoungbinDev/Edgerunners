@@ -8,6 +8,7 @@ public class GameAssetSpawner : MonoBehaviour
     private static Dictionary<int, GameObject> SpawnedGameAssets = new Dictionary<int, GameObject>();
 
     private GameAssetManager GameAssetManager;
+    private GameAssetDB GameAssetDB;
 
     [SerializeField]
     private int GameAssetId = -1;
@@ -18,13 +19,21 @@ public class GameAssetSpawner : MonoBehaviour
 
     private void Start()
     {
-        GameAssetManager = GameManager.Instance.GameAssetManager;
+        GameAssetManager = GameManager.Instance.GetManager<GameAssetManager>();
         if(GameAssetManager == null)
         {
+            Debug.LogWarning("[Start] GameAssetManager is missing. Initialization aborted.");
             return;
         }
 
-        if(SpawnOnStartedGame)
+        GameAssetDB = GameManager.Instance.GetManager<DataTableManager>()?.DataTableMap.TryGetValue("GameAssetDB", out var table) == true ? table as GameAssetDB : null;
+        if(GameAssetDB == null)
+        {
+            Debug.LogWarning("[Start] GameAssetDB is missing. Initialization aborted.");
+            return;
+        }
+
+        if (SpawnOnStartedGame)
         {
             SpawnGameAsset();
         }
@@ -41,12 +50,12 @@ public class GameAssetSpawner : MonoBehaviour
         {
             spawnGameAssetId = GameAssetId;
         }
-
+        
         GameObject loadedAsset = await GameAssetManager.LoadAssetUsingGameAssetId(spawnGameAssetId);
         GameObject spawnedAsset = Instantiate(loadedAsset, this.transform.position, this.transform.rotation);
         GameAssetData assetData = spawnedAsset.AddComponent<GameAssetData>();
         spawnedAsset.transform.parent = IsSocketSpawner ? this.transform : null;
-        assetData.Init(SpawnedGameAssetKey, (GameManager.Instance.DataTableManager.DataTableMap["GameAssetDB"] as GameAssetDB).GetDataDictionary()[spawnGameAssetId]);
+        assetData.Init(SpawnedGameAssetKey, GameAssetDB.GetDataDictionary()[spawnGameAssetId]);
         SpawnedGameAssets.Add(SpawnedGameAssetKey, spawnedAsset);
         ++SpawnedGameAssetKey;
     }
